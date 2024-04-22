@@ -1,4 +1,5 @@
 import logo from "../../assets/images/react.svg";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -11,9 +12,9 @@ const Login = () => {
         </p>
         <p className="lead">
           قبلا ثبت نام نکرده اید؟
-          <a href="/register" className="me-2">
+          <Link to="/register" className="me-2">
             ثبت نام کنید{" "}
-          </a>
+          </Link>
         </p>
       </div>
 
