@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/react.svg";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Register = () => {
@@ -10,19 +10,26 @@ const Register = () => {
     confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
-  
+  const [submitting, setSubmitting] = useState(false);
+  const [submitErrors, setSubmitErrors] = useState([]);
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
+    });
+    setErrors({
+      ...errors,
+      [name]: null, // Clear error when the field value changes
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let formErrors = {};
-    
+
     if (!formData.mobile) {
       formErrors.mobile = "موبایل الزامی است";
     } else if (formData.mobile.length < 10 || formData.mobile.length > 11) {
@@ -31,10 +38,13 @@ const Register = () => {
 
     if (!formData.password) {
       formErrors.password = "رمز عبور الزامی است";
+    } else if (formData.password.length < 6) {
+      formErrors.password = "رمز عبور باید حداقل 6 کاراکتر داشته باشد";
     }
 
     if (formData.password !== formData.confirmPassword) {
-      formErrors.confirmPassword = "تکرار رمز عبور با رمز عبور وارد شده مطابقت ندارد";
+      formErrors.confirmPassword =
+        "تکرار رمز عبور با رمز عبور وارد شده مطابقت ندارد";
     }
 
     if (Object.keys(formErrors).length > 0) {
@@ -43,17 +53,21 @@ const Register = () => {
     }
 
     try {
+      setSubmitting(true);
       const response = await axios.post(
         "https://react-mini-projects-api.classbon.com/Users",
         formData
       );
       if (response.status === 200) {
         console.log("Form submitted successfully!");
-      } else {
-        console.error("Failed to submit form:", response.statusText);
+        navigate("/login"); // Redirect to login page on success
       }
     } catch (error) {
-      console.error("Error submitting form:", error.message);
+      console.error("Error submitting form:", error.response);
+      const errorMessages = error?.response?.data || [{ description: "خطایی رخ داده است، لطفا دوباره تلاش کنید." }];
+      setSubmitErrors(errorMessages.map(error => error.description));
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -128,10 +142,23 @@ const Register = () => {
                 )}
               </div>
               <div className="text-center mt-3">
-                <button type="submit" className="btn btn-lg btn-primary">
-                  ثبت نام کنید
+                <button
+                  type="submit"
+                  className="btn btn-lg btn-primary"
+                  disabled={submitting}
+                >
+                  {submitting ? "در حال ارسال" : "ثبت نام کنید"}
                 </button>
               </div>
+
+              {submitErrors.length > 0 && (
+                <div className="alert alert-danger mt-3" role="alert">
+                  {submitErrors.map((error, index) => (
+                    <p key={index}>{error}</p>
+                  ))}
+                </div>
+              )}
+
             </form>
           </div>
         </div>
