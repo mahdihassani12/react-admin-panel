@@ -12,13 +12,16 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />}>
+      <Route element={<App />}>
         <Route path="/">
           <Route index element={<Dashboard />} />
           <Route element={<Identity />}>
             {/* Nested routes under Identity */}
             <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
+            <Route
+              path="register"
+              element={<Register />}
+            />
           </Route>
           <Route path="*" element={<NoMatch />} />
         </Route>
