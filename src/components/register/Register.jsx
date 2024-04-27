@@ -21,6 +21,27 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let formErrors = {};
+    
+    if (!formData.mobile) {
+      formErrors.mobile = "موبایل الزامی است";
+    } else if (formData.mobile.length < 10 || formData.mobile.length > 11) {
+      formErrors.mobile = "موبایل باید بین 10 تا 11 رقم باشد";
+    }
+
+    if (!formData.password) {
+      formErrors.password = "رمز عبور الزامی است";
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      formErrors.confirmPassword = "تکرار رمز عبور با رمز عبور وارد شده مطابقت ندارد";
+    }
+
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return;
+    }
+
     try {
       const response = await axios.post(
         "https://react-mini-projects-api.classbon.com/Users",
