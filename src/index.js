@@ -7,6 +7,7 @@ import Register from "./components/register/Register";
 import NoMatch from "./pages/NoMatch";
 import Identity from "./layouts/Identity";
 import Dashboard from "./pages/Dashboard";
+import './core/i18n';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/react.svg";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ const Register = () => {
   const [submitting, setSubmitting] = useState(false);
   const [submitErrors, setSubmitErrors] = useState([]);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,7 +67,7 @@ const Register = () => {
     } catch (error) {
       console.error("Error submitting form:", error.response);
       const errorMessages = error?.response?.data || [{ description: "خطایی رخ داده است، لطفا دوباره تلاش کنید." }];
-      setSubmitErrors(errorMessages.map(error => error.description));
+      setSubmitErrors(errorMessages.map(error => error.code));
     } finally {
       setSubmitting(false);
     }
@@ -147,14 +149,14 @@ const Register = () => {
                   className="btn btn-lg btn-primary"
                   disabled={submitting}
                 >
-                  {submitting ? "در حال ارسال" : "ثبت نام کنید"}
+                  {submitting ? t("register.saving") : t("register.register")}
                 </button>
               </div>
 
               {submitErrors.length > 0 && (
-                <div className="alert alert-danger mt-3" role="alert">
+                <div className="alert alert-danger text-danger p-2 mt-3" role="alert">
                   {submitErrors.map((error, index) => (
-                    <p key={index}>{error}</p>
+                    <p className="mb-0" key={index}> {t(`register.validation.${error}`)} </p>
                   ))}
                 </div>
               )}

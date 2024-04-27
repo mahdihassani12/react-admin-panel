@@ -1,0 +1,59 @@
+{
+    "classbon": "classbon",
+    "register": {
+      "title": "Online Education Platform",
+      "introMessage": "Register to use the features of Classbon online education platform",
+      "register": "Register",
+      "mobile": "Mobile",
+      "password": "Password",
+      "repeatPassword": "Repeat password",
+      "alreadyRegistered": "Already registered?",
+      "signin": "Sign in",
+      "saving": "Saving...",
+      "successOpertion": "Your Change have been successfully saved",
+      "validation": {
+        "mobileRequired": "Mobile is required",
+        "passwordRequired": "Password is required",
+        "repeatPasswordRequired": "Repeat Password is Required",
+        "mobileLength": "Mobile number must be 11 digits",
+        "notMatching": "Password do not match",
+        "PasswordTooShort": "Password must be at least 6 characters",
+        "DuplicateUserName": "This usernme is already taken"
+      }
+    },
+    "login": {
+      "title": "Online Education Platform",
+      "introMessage": "To log in , you need to use your mobile phone and password",
+      "signingin": "Signing in ...",
+      "signin": "Sign in",
+      "register": "Register",
+      "mobile": "Mobile",
+      "password": "Password",
+      "areNotRegistered": "You're not registered?",
+      "validation": {
+        "mobileRequired": "Mobile is required",
+        "passwordRequired": "Password is required",
+        "IncorrectUserNameOrPassword": "The username or password is incorrect"
+      }
+    },
+    "mainLayout": {
+      "sidebar": {
+        "subtitle": "Online Education Platform",
+        "courseManagement": "Course Management",
+        "allCourses": "All Courses",
+        "courseCategory": "Courses Category",
+        "coursseDiscount": "Course Discount",
+        "userManagement": "User Management",
+        "teacherManagement": "Teacher Management",
+        "studentManagement": "Student Management",
+        "blogManagement": "blog Management",
+        "tagManagement": "Tag Management",
+        "postManagement": "Post Management"
+      }
+    },
+    "categoryList": {
+      "DeleteIsNotPossible": "It is not possible to delete this Category",
+      "DuplicateCategory": "The Category is duplicate"
+    }
+  }
+  
