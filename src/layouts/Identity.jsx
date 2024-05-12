@@ -1,9 +1,13 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import ChangeLanguage from '../components/ChangeLanguage'
 
 function Identity() {
   return (
     <>
+      <nav className="navbar shadow-sm justify-content-start gap-3">
+        <ChangeLanguage />
+      </nav>
       <div className="main d-flex justify-content-center w-100">
         <main className="content d-flex p-0">
           <div className="container d-flex flex-column">

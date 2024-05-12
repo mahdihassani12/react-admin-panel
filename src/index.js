@@ -7,26 +7,26 @@ import Register from "./components/register/Register";
 import NoMatch from "./pages/NoMatch";
 import Identity from "./layouts/Identity";
 import Dashboard from "./pages/Dashboard";
-import './core/i18n';
+import "./core/i18n";
+import { AppProvider } from "./contexts/app/App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route element={<App />}>
-        <Route path="/">
-          <Route index element={<Dashboard />} />
-          <Route element={<Identity />}>
-            {/* Nested routes under Identity */}
-            <Route path="login" element={<Login />} />
-            <Route
-              path="register"
-              element={<Register />}
-            />
+  <AppProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<App />}>
+          <Route path="/">
+            <Route index element={<Dashboard />} />
+            <Route element={<Identity />}>
+              {/* Nested routes under Identity */}
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+            </Route>
+            <Route path="*" element={<NoMatch />} />
           </Route>
-          <Route path="*" element={<NoMatch />} />
         </Route>
-      </Route>
-    </Routes>
-  </BrowserRouter>
+      </Routes>
+    </BrowserRouter>
+  </AppProvider>
 );
